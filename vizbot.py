@@ -51,7 +51,7 @@ def get_openai_recommendation(df, api_key):
 
     # Usar el modelo de chat con el endpoint correcto
     response = openai.ChatCompletion.create(
-        model="gpt-3.5-turbo",  # También puedes usar "gpt-4" si tienes acceso
+        model="gpt-4",  # También puedes usar "gpt-4" si tienes acceso
         messages=[
             {"role": "system", "content": "Eres un asistente experto en análisis de datos."},
             {"role": "user", "content": f"Tengo un conjunto de datos. {description} ¿Qué tipo de visualizaciones recomendarías para analizar estos datos? Por favor, explica por qué."}
