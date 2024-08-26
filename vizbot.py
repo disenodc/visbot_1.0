@@ -135,7 +135,7 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-st.title("VizBot - Generador Automático de Visualizaciones con IA")
+st.title("VizBot - Generador Automático de Visualizaciones interactivas con IA")
 
 api_key = st.text_input("Ingrese su API Key de OpenAI", type="password")
 url_input = st.text_input("Ingrese la URL del archivo de datos")

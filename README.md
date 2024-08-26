@@ -1,1 +1,2 @@
-# vizbot Generador Automático de Visualizaciones con IA
+# VizBot - Generador Automático de Visualizaciones interactivas con IA
+
