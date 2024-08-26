@@ -1,3 +1,4 @@
+![Logo vizbot](https://raw.githubusercontent.com/disenodc/vizbot/main/bot_1.png)
 # VizBot - Generador Automático de Visualizaciones interactivas con IA
 
 1. Introducción
@@ -64,12 +65,13 @@ Este proyecto propone una solución innovadora para uno de los desafíos contemp
 
  7. Referencias
 
-Streamlit: The fastest way to build and share data apps. (2024). Recuperado de https://streamlit.io/
-OpenAI. (2024). OpenAI API documentation. Recuperado de https://platform.openai.com/docs
-Plotly. (2024). Plotly Python Graphing Library. Recuperado de https://plotly.com/python/
-The Pandas Development Team. (2024). Pandas documentation. Recuperado de https://pandas.pydata.org/
-Reitz, K., & Team. (2024). Requests: HTTP for Humans. Recuperado de https://requests.readthedocs.io/
-Brown, T., Mann, B., Ryder, N., et al. (2020). Language Models are Few-Shot Learners. Advances in Neural Information Processing Systems, 33, 1877-1901.
-McKinney, W. (2010). Data Structures for Statistical Computing in Python. Proceedings of the 9th Python in Science Conference, 51-56.
-Seaborn: Statistical Data Visualization — Seaborn 0.11.1 Documentation. (2020). Recuperado de https://seaborn.pydata.org/
-Ribeiro, M. T., Singh, S., & Guestrin, C. (2016). "Why Should I Trust You?": Explaining the Predictions of Any Classifier. Proceedings of the 22nd ACM SIGKDD International Conference on Knowledge Discovery and Data Mining, 1135-1144.
+ - Brown, T., Mann, B., Ryder, N., et al. (2020). Language Models are Few-Shot Learners. *Advances in Neural Information Processing Systems, 33*, 1877-1901.
+- McKinney, W. (2010). Data Structures for Statistical Computing in Python. *Proceedings of the 9th Python in Science Conference*, 51-56.
+- OpenAI. (2024). *OpenAI API documentation*. Recuperado de https://platform.openai.com/docs
+- Plotly. (2024). *Plotly Python Graphing Library*. Recuperado de https://plotly.com/python/
+- Reitz, K., & Team. (2024). *Requests: HTTP for Humans*. Recuperado de https://requests.readthedocs.io/
+- Ribeiro, M. T., Singh, S., & Guestrin, C. (2016). "Why Should I Trust You?": Explaining the Predictions of Any Classifier. *Proceedings of the 22nd ACM SIGKDD International Conference on Knowledge Discovery and Data Mining*, 1135-1144.
+- Seaborn: Statistical Data Visualization — Seaborn 0.11.1 Documentation. (2020). Recuperado de https://seaborn.pydata.org/
+- Streamlit. (2024). *The fastest way to build and share data apps*. Recuperado de https://streamlit.io/
+- The Pandas Development Team. (2024). *Pandas documentation*. Recuperado de https://pandas.pydata.org/
+
