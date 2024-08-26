@@ -1,6 +1,12 @@
 ![Logo vizbot](https://raw.githubusercontent.com/disenodc/vizbot/main/bot_1.png)
 # VizBot - Generador Automático de Visualizaciones interactivas con IA
 
+Autor: Lic. Luis Dario Ceballos. (2024). *VizBot - Generador Automático de Visualizaciones interactivas con IA*. 
+
+Espacio: METODOLOGÍA DE LA INVESTIGACIÓN CIENTÍFICA, Doctorado en Informática.
+Docente: Dr. Carlos Neil
+
+
 1. Introducción
 
 En la era del big data, la capacidad para transformar grandes volúmenes de datos en información comprensible y accionable es crucial. Las visualizaciones de datos juegan un papel esencial en este proceso, ya que permiten identificar patrones, tendencias y anomalías de manera intuitiva. Sin embargo, la creación de visualizaciones efectivas puede ser un desafío, especialmente para usuarios que no cuentan con experiencia en análisis de datos o diseño gráfico. Con la aparición de los Modelos de Lenguaje de Gran Escala (LLMs, por sus siglas en inglés), como los desarrollados por OpenAI, se abre una nueva posibilidad para la automatización de este proceso. Este proyecto propone la construcción de una interfaz interactiva utilizando el framework Streamlit, que se apoya en LLMs y técnicas de machine learning para analizar la estructura de los datos proporcionados por los usuarios y generar visualizaciones recomendadas. Esta herramienta tiene el potencial de democratizar el acceso a análisis de datos avanzados, facilitando la interpretación de datos para una amplia gama de usuarios.

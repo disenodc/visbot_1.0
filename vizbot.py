@@ -11,7 +11,7 @@ st.set_page_config(
     page_icon="https://raw.githubusercontent.com/disenodc/vizbot/main/bot_2.ico",
 )
 
-logo_url = "https://raw.githubusercontent.com/disenodc/vizbot/main/bot_2.png"
+logo_url = "https://raw.githubusercontent.com/disenodc/vizbot/main/bot_1.png"
 logo_width = 100
 
 def read_data(file_path_or_url):
