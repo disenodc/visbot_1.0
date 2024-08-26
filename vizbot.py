@@ -174,7 +174,7 @@ st.markdown(
     }
     </style>
     <div class="footer">
-        Developed by: <a href="https://linktr.ee/oiradsollabec" target="_blank">Dario Ceballos</a>
+        Developed by: <a href="https://linktr.ee/oiradsollabec" target="_blank">Dario Ceballos</a> | Repo: <a href="https://github.com/disenodc/vizbot" target="_blank"> Github </a>
     </div>
     """,
     unsafe_allow_html=True
