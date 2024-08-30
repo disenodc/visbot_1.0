@@ -1,9 +1,11 @@
 ![Logo vizbot](https://raw.githubusercontent.com/disenodc/vizbot/main/bot_1.png)
 # VizBot - Generador Automático de Visualizaciones interactivas con IA
+
 - Visitar: [Sitio Web](https://vizbot-main.streamlit.app/)
 - Autor: Lic. Luis Dario Ceballos. (2024). *VizBot - Generador Automático de Visualizaciones interactivas con IA*. 
-- Espacio: METODOLOGÍA DE LA INVESTIGACIÓN CIENTÍFICA, Doctorado en Informática.
-- Docente: Dr. Carlos Neil
+- Doctorado en Informática. UAI (Universidad Abierta Interamericana), Buenos Aires-Argentina.
+   CESIMAR - CENPAT - CONICET. Puerto Madryn, Chubut, Argentina, (U9120).
+
 
 
 1. Introducción
@@ -46,7 +48,9 @@ El desarrollo del proyecto se llevará a cabo en varias etapas clave:
 
  4. Metodología
 
-La metodología del proyecto se basará en un enfoque ágil, iterativo, que permite ajustes rápidos en respuesta al feedback de los usuarios y a los resultados obtenidos durante las pruebas. Las etapas metodológicas incluirán:
+La metodología del proyecto se basará en un enfoque ágil, iterativo, que permite ajustes rápidos en respuesta al feedback de los usuarios y a los resultados obtenidos durante las pruebas. 
+
+PIPELINE:
 
 - Investigación Inicial: Revisión de la literatura sobre LLMs, machine learning y técnicas de visualización de datos.
 - Desarrollo Tecnológico: Programación e integración de los componentes utilizando Python, Streamlit, y APIs de OpenAI.
