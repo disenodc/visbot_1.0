@@ -1,6 +1,6 @@
 ![Logo vizbot](https://raw.githubusercontent.com/disenodc/vizbot/main/bot_1.png)
 # VizBot - Generador Automático de Visualizaciones interactivas con IA
-- [Sitio Web](https://vizbot-main.streamlit.app/)
+- Visitar: [Sitio Web](https://vizbot-main.streamlit.app/)
 - Autor: Lic. Luis Dario Ceballos. (2024). *VizBot - Generador Automático de Visualizaciones interactivas con IA*. 
 - Espacio: METODOLOGÍA DE LA INVESTIGACIÓN CIENTÍFICA, Doctorado en Informática.
 - Docente: Dr. Carlos Neil
