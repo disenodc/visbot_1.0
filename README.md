@@ -31,7 +31,7 @@ cd ruta/al/directorio/del/repositorio/
  streamlit run vizbot.py
 ```
 
-///////////////////////
+/////////////////////////////////
 ## PROYECTO
 
 
