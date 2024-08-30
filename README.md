@@ -7,6 +7,24 @@
    CESIMAR - CENPAT - CONICET. Puerto Madryn, Chubut, Argentina, (U9120).
 
 
+## PIPELINE de ejecución local
+
+- Clonar el repositorio
+
+```bash
+git clone https://github.com/disenodc/vizbot.git
+```
+
+- luego instalar librerias requeridas
+
+```bash
+ pip install -r requirements.txt
+```
+- Por ultimo correr la aplicación
+
+```bash
+ streamlit run vizbot.py
+```
 
 1. Introducción
 
@@ -48,9 +66,7 @@ El desarrollo del proyecto se llevará a cabo en varias etapas clave:
 
  4. Metodología
 
-La metodología del proyecto se basará en un enfoque ágil, iterativo, que permite ajustes rápidos en respuesta al feedback de los usuarios y a los resultados obtenidos durante las pruebas. 
-
-PIPELINE:
+La metodología del proyecto se basará en un enfoque ágil, iterativo, que permite ajustes rápidos en respuesta al feedback de los usuarios y a los resultados obtenidos durante las pruebas. Etapas de la metodologia:
 
 - Investigación Inicial: Revisión de la literatura sobre LLMs, machine learning y técnicas de visualización de datos.
 - Desarrollo Tecnológico: Programación e integración de los componentes utilizando Python, Streamlit, y APIs de OpenAI.
