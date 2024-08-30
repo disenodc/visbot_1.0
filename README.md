@@ -33,7 +33,7 @@ cd ruta/al/directorio/del/repositorio/
 
 ///////////////////////
 ## PROYECTO
-///////////////////////
+
 
 
 1. Resumen
