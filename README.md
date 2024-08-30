@@ -14,6 +14,11 @@
 ```bash
 git clone https://github.com/disenodc/vizbot.git
 ```
+- Navegar al directorio 
+
+```bash
+cd ruta/al/directorio/del/repositorio/
+```
 
 - luego instalar librerias requeridas
 
