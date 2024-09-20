@@ -41,7 +41,7 @@ def read_data(file_path_or_url):
     return df
 
 # Función para obtener recomendaciones de visualización de OpenAI utilizando GPT-4
-def get_openai_recommendation(df, api_key, model="gpt-4"):
+def get_openai_recommendation(df, api_key, model="gpt-4-turbo"):
     description = f"El conjunto de datos tiene {df.shape[0]} filas y {df.shape[1]} columnas. "
     for column in df.columns:
         description += f"La columna '{column}' es de tipo {df[column].dtype}, "
@@ -56,7 +56,7 @@ def get_openai_recommendation(df, api_key, model="gpt-4"):
 
     # Usamos GPT-4 o GPT-4-turbo
     response = openai.ChatCompletion.create(
-        model=model,  # Cambiamos a gpt-4 o gpt-4-turbo
+        model= "gpt-4-turbo",  # Cambiamos a gpt-4 o gpt-4-turbo
         messages=[
             {"role": "system", "content": "Eres un asistente experto en análisis de datos."},
             {"role": "user",
