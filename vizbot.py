@@ -58,7 +58,7 @@ def get_openai_recommendation(df, api_key, model="gpt-4-turbo"):
     response = openai.ChatCompletion.create(
         model= "gpt-4-turbo",  # Cambiamos a gpt-4 o gpt-4-turbo
         messages=[
-            {"role": "system", "content": "Eres un asistente experto en análisis de datos."},
+            {"role": "system", "content": "Eres un asistente experto en análisis de datos de biodiversidad marina, especializado en elefantes marinos."},
             {"role": "user",
              "content": f"Tengo un conjunto de datos. {description} ¿Qué tipo de visualizaciones recomendarías para analizar estos datos? Por favor, explica por qué."}
         ],
@@ -74,8 +74,8 @@ def recommend_and_plot(df):
     analysis = analyze_data(df)
 
     # Parámetros configurables
-    hist_bins = st.slider("Número de bins para histogramas", min_value=10, max_value=100, value=30)
-    scatter_size = st.slider("Tamaño de los puntos en el gráfico de dispersión", min_value=5, max_value=50, value=10)
+   # hist_bins = st.slider("Número de bins para histogramas", min_value=10, max_value=100, value=30)
+   # scatter_size = st.slider("Tamaño de los puntos en el gráfico de dispersión", min_value=5, max_value=50, value=10)
     x_axis = st.selectbox("Selecciona la columna para el eje X", df.columns)
     y_axis = st.selectbox("Selecciona la columna para el eje Y", df.columns)
 
