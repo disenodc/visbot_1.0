@@ -6,13 +6,13 @@ import requests
 import openai
 
 st.set_page_config(
-    page_title="VizBot - Análisis con IA",  # Título en la pestaña del navegador
-    page_icon="https://raw.githubusercontent.com/disenodc/vizbot/main/bot_2.ico",  # Emoji o ruta a un archivo .ico para el favicon
+    page_title="VizBot - Análisis con IA",
+    page_icon="https://raw.githubusercontent.com/disenodc/vizbot/main/bot_2.ico",
 )
 
 # Configuración del logo y el título
-logo_url = "https://raw.githubusercontent.com/disenodc/vizbot/main/bot_1.png"  # URL del logo o ruta local ('./logo.png')
-logo_width = 100  # Ancho del logo en píxeles
+logo_url = "https://raw.githubusercontent.com/disenodc/vizbot/main/bot_1.png"
+logo_width = 100
 
 # Función para leer datos
 def read_data(file_path_or_url):
@@ -39,7 +39,6 @@ def read_data(file_path_or_url):
             raise ValueError("Formato de archivo no soportado.")
 
     return df
-
 
 # Función para obtener recomendaciones de visualización de OpenAI
 def get_openai_recommendation(df, api_key):
@@ -81,11 +80,18 @@ def recommend_and_plot(df):
 
     for column, col_type in analysis.items():
         if col_type == 'numeric':
-            fig_hist = px.histogram(df, x=column, nbins=30, title=f'Histograma de {column}')
+            # Aplicar el parámetro configurable 'hist_bins' para el histograma
+            fig_hist = px.histogram(df, x=column, nbins=hist_bins, title=f'Histograma de {column}')
             st.plotly_chart(fig_hist)
 
             fig_box = px.box(df, y=column, title=f'Diagrama de caja de {column}')
             st.plotly_chart(fig_box)
+
+            # Verificar si el usuario seleccionó las columnas para el gráfico de dispersión
+            if x_axis and y_axis:
+                # Aplicar el parámetro configurable 'scatter_size' para el gráfico de dispersión
+                fig_scatter = px.scatter(df, x=x_axis, y=y_axis, size_max=scatter_size, title=f'Gráfico de dispersión de {x_axis} vs {y_axis}')
+                st.plotly_chart(fig_scatter)
 
         elif col_type == 'categorical':
             fig_count = px.bar(df[column].value_counts().reset_index(), x='index', y=column, title=f'Conteo de {column}')
@@ -131,8 +137,6 @@ st.markdown(
 
 # Interfaz de usuario con Streamlit
 st.title("VizBot - Generador Automático de Visualizaciones con IA")
-
-
 
 # Input para la clave API de OpenAI
 api_key = st.text_input("Ingrese su API Key de OpenAI", type="password")
@@ -184,7 +188,6 @@ st.markdown(
         text-align: center;
         padding: 10px;
         font-size: 14px;
-
     }
     .footer a {
         color: #34ede3;
