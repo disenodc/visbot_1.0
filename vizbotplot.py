@@ -67,48 +67,130 @@ def get_openai_recommendation(df, api_key, model="gpt-4-turbo"):
 
     return response['choices'][0]['message']['content']
 
-
 # Función para generar visualizaciones utilizando Plotly
 def recommend_and_plot(df):
     st.subheader("Visualizaciones Recomendadas")
+    
+    # Análisis de tipos de datos
     analysis = analyze_data(df)
 
-    # Parámetros configurables
-   # hist_bins = st.slider("Número de bins para histogramas", min_value=10, max_value=100, value=30)
-   # scatter_size = st.slider("Tamaño de los puntos en el gráfico de dispersión", min_value=5, max_value=50, value=10)
-    x_axis = st.selectbox("Selecciona la columna para el eje X", df.columns)
-    y_axis = st.selectbox("Selecciona la columna para el eje Y", df.columns)
+    # Parámetros configurables en la barra lateral
+    st.sidebar.header("Selección de Variables de interés")
 
+    # Selectbox para seleccionar las columnas de los ejes X y Y en la barra lateral
+    x_axis = st.sidebar.selectbox("Selecciona la columna para el eje X", df.columns)
+    y_axis = st.sidebar.selectbox("Selecciona la columna para el eje Y", df.columns)
+    z_axis = st.sidebar.selectbox("Selecciona la columna para el eje Z", df.columns)
+
+    st.sidebar.subheader("Parámetros configurables")
+    hist_bins = st.sidebar.slider("Número de bins para histogramas", min_value=10, max_value=100, value=30)
+    scatter_size = st.sidebar.slider("Tamaño de los puntos en el gráfico de dispersión", min_value=5, max_value=50, value=10)
+
+   
+    # Obtener los tipos de las columnas seleccionadas
+    x_type = analysis.get(x_axis, 'unknown')
+    y_type = analysis.get(y_axis, 'unknown')
+    z_type = analysis.get(z_axis, 'unknown')
+
+    # Generar gráficos dependiendo de los tipos de datos seleccionados
+    if x_type == 'numeric' and y_type == 'numeric':
+        # Si ambos ejes son numéricos, hacer gráficos de dispersión, correlación y violín
+        fig_scatter = px.scatter(df, x=x_type, y=y_type, size_max=scatter_size, title=f'Gráfico de dispersión de {x_type} vs {y_type}')
+        st.plotly_chart(fig_scatter)
+        
+        fig_corr = px.density_heatmap(df, x=x_type, y=y_type, title=f'Mapa de calor de {x_type} vs {y_type}')
+        st.plotly_chart(fig_corr)
+
+        fig_violin = px.violin(df, x=x_type, y=y_type, title=f'Gráfico de violín de {x_type} vs {y_type}')
+        st.plotly_chart(fig_violin)
+
+        # Agregar un gráfico de dispersión 3D si se tiene más de dos columnas numéricas
+        if len(df.select_dtypes(include='number').columns) > 2:
+            z_type = st.selectbox("Selecciona la columna para el eje Z (Opcional)", df.columns)
+            if z_type:
+                fig_scatter_3d = px.scatter_3d(df, x=x_type, y=y_type, z=z_type, title=f'Gráfico de dispersión 3D de {x_type} vs {y_type} vs {z_type}')
+                st.plotly_chart(fig_scatter_3d)
+
+    elif x_type == 'numeric' and y_type == 'categorical':
+        # Si X es numérico y Y es categórico, hacer boxplot y gráfico de violín
+        fig_box = px.box(df, x=y_type, y=x_type, title=f'Diagrama de caja de {x_type} por {y_type}')
+        st.plotly_chart(fig_box)
+
+        fig_violin = px.violin(df, x=y_type, y=x_type, title=f'Gráfico de violín de {x_type} por {y_type}')
+        st.plotly_chart(fig_violin)
+
+        # Gráfico de barras con la media de los valores numéricos por categoría
+        fig_bar_mean = px.bar(df.groupby(y_type)[x_type].mean().reset_index(), x=y_type, y=x_type, title=f'Media de {x_type} por {y_type}')
+        st.plotly_chart(fig_bar_mean)
+
+    elif x_type == 'categorical' and y_type == 'numeric':
+        # Si X es categórico y Y es numérico, hacer boxplot, violín y barras
+        fig_box = px.box(df, x=x_type, y=y_type, title=f'Diagrama de caja de {y_type} por {x_type}')
+        st.plotly_chart(fig_box)
+
+        fig_violin = px.violin(df, x=x_type, y=y_type, title=f'Gráfico de violín de {y_type} por {x_type}')
+        st.plotly_chart(fig_violin)
+
+        fig_bar_mean = px.bar(df.groupby(x_type)[y_type].mean().reset_index(), x=x_type, y=y_type, title=f'Media de {y_type} por {x_type}')
+        st.plotly_chart(fig_bar_mean)
+
+    elif x_type == 'categorical' and y_type == 'categorical':
+        # Si ambos son categóricos, hacer gráfico de barras apiladas y gráfico de mosaico
+        fig_bar = px.bar(df.groupby([x_type, y_type]).size().reset_index(name='counts'), x=x_type, y='counts', color=y_type, barmode='group', title=f'Conteo de {x_type} por {y_type}')
+        st.plotly_chart(fig_bar)
+
+        fig_mosaic = px.sunburst(df, path=[x_type, y_type], title=f'Gráfico de mosaico de {x_type} y {y_type}')
+        st.plotly_chart(fig_mosaic)
+
+    elif x_type == 'numeric' and y_type == 'datetime':
+        # Si X es numérico y Y es temporal, hacer gráfico de líneas y gráfico de área
+        fig_trend = px.line(df, x=y_type, y=x_type, title=f'Tendencia de {x_type} a lo largo del tiempo ({y_type})')
+        st.plotly_chart(fig_trend)
+
+        fig_area = px.area(df, x=y_type, y=x_type, title=f'Gráfico de área de {x_type} a lo largo del tiempo ({y_type})')
+        st.plotly_chart(fig_area)
+
+    elif x_type == 'datetime' and y_type == 'numeric':
+        # Si X es temporal y Y es numérico, hacer gráfico de líneas y gráfico de área
+        fig_trend = px.line(df, x=x_type, y=y_type, title=f'Tendencia de {y_type} a lo largo del tiempo ({x_type})')
+        st.plotly_chart(fig_trend)
+
+        fig_area = px.area(df, x=x_type, y=y_type, title=f'Gráfico de área de {y_type} a lo largo del tiempo ({x_type})')
+        st.plotly_chart(fig_area)
+
+    # Visualizaciones adicionales para columnas individuales
     for column, col_type in analysis.items():
         if col_type == 'numeric':
-            # Aplicar el parámetro configurable 'hist_bins' para el histograma
+            # Histograma
             fig_hist = px.histogram(df, x=column, nbins=hist_bins, title=f'Histograma de {column}')
             st.plotly_chart(fig_hist)
 
+            # Diagrama de caja
             fig_box = px.box(df, y=column, title=f'Diagrama de caja de {column}')
             st.plotly_chart(fig_box)
 
-            # Verificar si el usuario seleccionó las columnas para el gráfico de dispersión
-            if x_axis and y_axis:
-                # Aplicar el parámetro configurable 'scatter_size' para el gráfico de dispersión
-                fig_scatter = px.scatter(df, x=x_axis, y=y_axis, size_max=scatter_size, title=f'Gráfico de dispersión de {x_axis} vs {y_axis}')
-                st.plotly_chart(fig_scatter)
+            # Gráfico de violín
+            fig_violin = px.violin(df, y=column, title=f'Gráfico de violín de {column}')
+            st.plotly_chart(fig_violin)
 
         elif col_type == 'categorical':
+            # Gráfico de barras para conteo de categorías
             fig_count = px.bar(df[column].value_counts().reset_index(), x='index', y=column, title=f'Conteo de {column}')
             st.plotly_chart(fig_count)
 
-            fig_prop = px.bar(df[column].value_counts(normalize=True).reset_index(), x='index', y=column,
-                              title=f'Proporciones de {column}', labels={column: 'Porcentaje'})
+            # Gráfico de barras para proporciones de categorías
+            fig_prop = px.bar(df[column].value_counts(normalize=True).reset_index(), x='index', y=column, title=f'Proporciones de {column}', labels={column: 'Porcentaje'})
             st.plotly_chart(fig_prop)
 
         elif col_type == 'datetime':
+            # Gráfico de línea para tendencias temporales
             fig_trend = px.line(df, x=column, y=df[column].value_counts().sort_index(), title=f'Tendencia temporal de {column}')
             st.plotly_chart(fig_trend)
 
-            fig_cumsum = px.line(df, x=column, y=df[column].value_counts().sort_index().cumsum(),
-                                 title=f'Cambio acumulativo de {column} a lo largo del tiempo')
+            # Gráfico de línea para cambio acumulativo
+            fig_cumsum = px.line(df, x=column, y=df[column].value_counts().sort_index().cumsum(), title=f'Cambio acumulativo de {column} a lo largo del tiempo')
             st.plotly_chart(fig_cumsum)
+
 
 
 # Función para analizar datos
