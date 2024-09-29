@@ -1,8 +1,7 @@
 ![Logo vizbot](https://raw.githubusercontent.com/disenodc/vizbot/main/bot_1.png)
 # VizBot - Generador Automático de Visualizaciones interactivas con IA
 
-- Visitar: [Sitio Web](https://vizbot-main.streamlit.app/)
-- [LICENCIA](https://github.com/disenodc/vizbot/blob/main/LICENSE)
+- Visitar: [Sitio Web](https://vizbot-main.streamlit.app/) / [LICENCIA](https://github.com/disenodc/vizbot/blob/main/LICENSE)
 - Autor: Lic. Luis Dario Ceballos. (2024). *VizBot - Generador Automático de Visualizaciones interactivas con IA*. 
 - Doctorado en Informática. UAI (Universidad Abierta Interamericana), Buenos Aires-Argentina.
    CESIMAR - CENPAT - CONICET. Puerto Madryn, Chubut, Argentina, (U9120).
