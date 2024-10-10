@@ -53,7 +53,7 @@ def get_openai_recommendation(df, api_key, model="gpt-4-turbo"):
     response = openai.ChatCompletion.create(
         model= "gpt-4-turbo",  # Cambiamos a gpt-4 o gpt-4-turbo
         messages=[
-            {"role": "system", "content": "Eres un asistente experto en análisis de datos de biodiversidad marina, especializado en elefantes marinos."},
+            {"role": "system", "content": "Eres un asistente experto en análisis de datos de biodiversidad marina."},
             {"role": "user",
              "content": f"Tengo un conjunto de datos. {description} ¿Qué tipo de visualizaciones recomendarías para analizar estos datos? Por favor, explica por qué."}
         ],
@@ -64,16 +64,18 @@ def get_openai_recommendation(df, api_key, model="gpt-4-turbo"):
 
 # Función para generar visualizaciones
 def recommend_and_plot(df):
-    st.subheader("Visualizaciones Recomendadas")
-    
+    #st.subheader("Visualizaciones Recomendadas")
     # Parámetros configurables en la barra lateral
-    st.sidebar.header("Selección de Variables de interés")
+    st.sidebar.header("Configuración")
 
     try:
         # Selectbox para seleccionar las columnas de los ejes X, Y y Z
         x_axis = st.sidebar.selectbox("Selecciona la columna para el eje X", df.columns)
         y_axis = st.sidebar.selectbox("Selecciona la columna para el eje Y", df.columns)
         z_axis = st.sidebar.selectbox("Selecciona la columna para el eje Z", df.columns)
+        z_axis = None
+        if chart_type in ["Gráfico de dispersión 3D", "Gráfico de barras apiladas"]:
+            z_axis = st.sidebar.selectbox("Seleccione la columna para el eje Z (opcional)", df.columns)
 
         # Parámetros adicionales
         st.sidebar.subheader("Parámetros configurables")
@@ -98,7 +100,7 @@ def recommend_and_plot(df):
 # Función principal
 def main():
     # Interfaz de usuario con Streamlit
-    st.title("VizBot - Generador Automático de Visualizaciones con IA")
+    st.title("VizBot - TEST - Generador Automático de Visualizaciones con IA")
 
     # Input para la clave API de OpenAI
     api_key = st.text_input("Ingrese su API Key de OpenAI", type="password")
@@ -111,6 +113,7 @@ def main():
 
     df = None
 
+    # Leer el archivo o URL
     if api_key:
         if url_input:
             try:
@@ -126,10 +129,96 @@ def main():
         if df is not None:
             st.write(df.head())  # Mostrar las primeras filas del DataFrame
 
-            # Generar y mostrar las visualizaciones recomendadas
-            recommend_and_plot(df)
+            # Generar y mostrar las recomendaciones de visualización de OpenAI
+            st.subheader("Visualizaciones recomendadas por iA")
+            try:
+                recommendation = get_openai_recommendation(df, api_key)
+                st.markdown(recommendation)  # Muestra las recomendaciones de GPT-4
+            except Exception as e:
+                st.error(f"Error al obtener las recomendaciones de OpenAI: {str(e)}")
+
+            # Selección de tipo de gráfico (chart_type) y variables para los ejes
+            chart_type = st.sidebar.selectbox(
+                "Seleccione el tipo de gráfico",
+                [
+                    "Gráfico de dispersión", "Gráfico de dispersión 3D", "Gráfico de líneas", 
+                    "Gráfico de áreas", "Gráfico de barras", "Gráfico de barras apiladas", 
+                    "Histograma", "Gráfico de caja (boxplot)", "Gráfico de violín", 
+                    "Gráfico de pastel (pie chart)", "Mapa de calor", "Mapa de dispersión geoespacial", 
+                    "Mapa de coropletas", "Diagrama de sol"
+                ]
+            )
+
+            x_axis = st.sidebar.selectbox("Selecciona la columna para el eje X", df.columns)
+            y_axis = st.sidebar.selectbox("Selecciona la columna para el eje Y", df.columns)
+            z_axis = None
+            if chart_type in ["Gráfico de dispersión 3D", "Gráfico de barras apiladas"]:
+                z_axis = st.sidebar.selectbox("Seleccione la columna para el eje Z (opcional)", df.columns)
+
+            hist_bins = st.sidebar.slider("Número de bins para histogramas", min_value=10, max_value=100, value=30)
+            scatter_size = st.sidebar.slider("Tamaño de los puntos en el gráfico de dispersión", min_value=5, max_value=50, value=10)
+
+            # Generar el gráfico seleccionado
+            fig = generate_plot(df, chart_type, x_axis, y_axis, z_axis, hist_bins, scatter_size)
+
+            # Mostrar el gráfico en la interfaz
+            if fig:
+                st.plotly_chart(fig)
+            else:
+                st.warning("Por favor, seleccione un tipo de gráfico y columnas válidas.")
     else:
         st.warning("Por favor, ingrese su API Key de OpenAI para continuar.")
+
+
+
+
+# Función para generar gráficos dependiendo de los tipos de datos y gráfico seleccionado
+def generate_plot(df, chart_type, x_axis=None, y_axis=None, z_axis=None, hist_bins=30, scatter_size=10):
+    fig = None
+
+    if chart_type == "Gráfico de dispersión":
+        fig = px.scatter(df, x=x_axis, y=y_axis, title=f'Dispersión de {x_axis} vs {y_axis}', size_max=scatter_size)
+    
+    elif chart_type == "Gráfico de dispersión 3D":
+        fig = px.scatter_3d(df, x=x_axis, y=y_axis, z=z_axis, title=f'Dispersión 3D de {x_axis}, {y_axis} y {z_axis}')
+    
+    elif chart_type == "Gráfico de líneas":
+        fig = px.line(df, x=x_axis, y=y_axis, title=f'Líneas de {x_axis} vs {y_axis}')
+    
+    elif chart_type == "Gráfico de áreas":
+        fig = px.area(df, x=x_axis, y=y_axis, title=f'Área de {x_axis} vs {y_axis}')
+    
+    elif chart_type == "Gráfico de barras":
+        fig = px.bar(df, x=x_axis, y=y_axis, title=f'Barras de {x_axis} vs {y_axis}')
+    
+    elif chart_type == "Gráfico de barras apiladas":
+        fig = px.bar(df, x=x_axis, y=y_axis, color=z_axis, title=f'Barras apiladas de {x_axis} vs {y_axis} por {z_axis}', barmode='stack')
+    
+    elif chart_type == "Histograma":
+        fig = px.histogram(df, x=x_axis, nbins=hist_bins, title=f'Histograma de {x_axis}')
+    
+    elif chart_type == "Gráfico de caja (boxplot)":
+        fig = px.box(df, x=x_axis, y=y_axis, title=f'Boxplot de {x_axis} vs {y_axis}')
+    
+    elif chart_type == "Gráfico de violín":
+        fig = px.violin(df, x=x_axis, y=y_axis, title=f'Violín de {x_axis} vs {y_axis}')
+    
+    elif chart_type == "Gráfico de pastel (pie chart)":
+        fig = px.pie(df, names=x_axis, title=f'Gráfico de pastel de {x_axis}')
+    
+    elif chart_type == "Mapa de calor":
+        fig = px.density_heatmap(df, x=x_axis, y=y_axis, title=f'Mapa de calor de {x_axis} vs {y_axis}')
+    
+    elif chart_type == "Mapa de dispersión geoespacial":
+        fig = px.scatter_geo(df, lat=y_axis, lon=x_axis, title=f'Mapa de dispersión geoespacial de {x_axis} y {y_axis}')
+    
+    elif chart_type == "Mapa de coropletas":
+        fig = px.choropleth(df, locations=x_axis, color=y_axis, title=f'Mapa de coropletas basado en {x_axis} y {y_axis}')
+    
+    elif chart_type == "Diagrama de sol":
+        fig = px.sunburst(df, path=[x_axis, y_axis], title=f'Diagrama de sol para {x_axis} y {y_axis}')
+    
+    return fig
 
 # Ejecutar la función principal
 if __name__ == "__main__":

@@ -58,6 +58,7 @@ def main():
     else:
         st.info("Cargue un archivo para comenzar a generar visualizaciones.")
 
+
 # Función para analizar datos y categorizar las columnas del dataframe
 def analyze_data(df):
     analysis = {}
