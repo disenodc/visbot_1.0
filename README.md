@@ -1,104 +1,104 @@
-![Logo vizbot](https://raw.githubusercontent.com/disenodc/vizbot/main/bot_1.png)
-# VizBot - Generador Automático de Visualizaciones interactivas con IA
+![Logo visbot](https://raw.githubusercontent.com/disenodc/visbot/main/bot_1.png)
+# VisBot - Visualization Recommender with iA
 
-- Visitar: [Sitio Web](https://vizbot-main.streamlit.app/) / [LICENCIA](https://github.com/disenodc/vizbot/blob/main/LICENSE)
-- Autor: Lic. Luis Dario Ceballos. (2024). *VizBot - Generador Automático de Visualizaciones interactivas con IA*. 
-- Doctorado en Informática. UAI (Universidad Abierta Interamericana), Buenos Aires-Argentina.
+- Visitar: [Sitio Web](https://visbot.streamlit.app/) / [LICENCIA](https://github.com/disenodc/visbot/blob/main/LICENSE)
+- Author: BCCs. Luis Dario Ceballos. (2024). *VisBot - Visualization Recommender with iA*. 
+- PhD in Computer Science. UAI (Inter-American Open University), Buenos Aires-Argentina.
    CESIMAR - CENPAT - CONICET. Puerto Madryn, Chubut, Argentina, (U9120).
 
 
-## PIPELINE de ejecución local
+## PIPELINE locally executed
 
-- Clonar el repositorio
+- Clone the repository
 
 ```bash
-git clone https://github.com/disenodc/vizbot.git
+git clone https://github.com/disenodc/visbot.git
 ```
-- Navegar al directorio 
+- Navigate to directory
 
 ```bash
 cd ruta/al/directorio/del/repositorio/
 ```
 
-- luego instalar librerias requeridas
+- then install required libraries
 
 ```bash
  pip install -r requirements.txt
 ```
-- Por ultimo correr la aplicación
+- Finally run the application
 
 ```bash
- streamlit run vizbot.py
+ streamlit run visbot.py
 ```
 
 /////////////////////////////////
-## PROYECTO
+## PROJECT
 
 
+1. Summary
 
-1. Resumen
+In the era of big data, the ability to transform large volumes of data into understandable and actionable information is crucial. Data visualizations play an essential role in this process, allowing you to identify patterns, trends, and anomalies intuitively. However, creating effective visualizations can be challenging, especially for users without experience in data analysis or graphic design. With the emergence of Large Scale Language Models (LLMs), such as those developed by OpenAI, a new possibility opens up for the automation of this process. This project proposes the construction of an interactive interface using the Streamlit framework, which is supported by LLMs and machine learning techniques to analyze the structure of the data provided by users and generate recommended visualizations. This tool has the potential to democratize access to advanced data analytics, making data interpretation easier for a wide range of users.
 
-En la era del big data, la capacidad para transformar grandes volúmenes de datos en información comprensible y accionable es crucial. Las visualizaciones de datos juegan un papel esencial en este proceso, ya que permiten identificar patrones, tendencias y anomalías de manera intuitiva. Sin embargo, la creación de visualizaciones efectivas puede ser un desafío, especialmente para usuarios que no cuentan con experiencia en análisis de datos o diseño gráfico. Con la aparición de los Modelos de Lenguaje de Gran Escala (LLMs, por sus siglas en inglés), como los desarrollados por OpenAI, se abre una nueva posibilidad para la automatización de este proceso. Este proyecto propone la construcción de una interfaz interactiva utilizando el framework Streamlit, que se apoya en LLMs y técnicas de machine learning para analizar la estructura de los datos proporcionados por los usuarios y generar visualizaciones recomendadas. Esta herramienta tiene el potencial de democratizar el acceso a análisis de datos avanzados, facilitando la interpretación de datos para una amplia gama de usuarios.
+ 2. Objectives
 
- 2. Objetivos
+General Objective:
 
-Objetivo General:
+Develop an interactive interface based on Streamlit, using LLMs and machine learning techniques, to automatically analyze and generate recommended data visualizations, adapted to the data provided by users.
 
-Desarrollar una interfaz interactiva basada en Streamlit, utilizando LLMs y técnicas de machine learning, para analizar y generar automáticamente visualizaciones de datos recomendadas, adaptadas a los datos proporcionados por los usuarios.
+Specific Objectives:
 
-Objetivos Específicos:
-
-1. Integrar un modelo LLM que pueda interpretar descripciones de datos y contextualizar la estructura de los mismos.
-2. Desarrollar algoritmos de machine learning que permitan seleccionar el tipo de visualización más adecuada para los datos en cuestión.
-3. Implementar una interfaz en Streamlit que facilite la interacción del usuario con el sistema, permitiendo la carga de datos y la visualización de las recomendaciones generadas.
-4. Evaluar la efectividad de las visualizaciones generadas automáticamente en comparación con las creadas manualmente por expertos.
-5. Validar la herramienta a través de pruebas con usuarios de distintos niveles de experiencia en análisis de datos.
-
- 3. Desarrollo
-
-El desarrollo del proyecto se llevará a cabo en varias etapas clave:
-
-3.1. Selección y Configuración del LLM:
-   - Se seleccionará un LLM adecuado de OpenAI, con la capacidad de comprender y procesar instrucciones en lenguaje natural relacionadas con la estructura y el análisis de datos.
-   - Se configurará el modelo para que interactúe eficientemente con los datos ingresados por los usuarios y pueda sugerir visualizaciones basadas en patrones reconocibles en los datos.
-
-3.2. Diseño de Algoritmos de Recomendación:
-   - Se desarrollarán algoritmos de machine learning que analicen la estructura de los datos (tipos de variables, relaciones entre ellas, etc.) para recomendar la visualización más adecuada.
-   - Estos algoritmos serán entrenados utilizando conjuntos de datos estándar para asegurar la precisión de las recomendaciones.
-
-3.3. Construcción de la Interfaz en Streamlit:
-   - Se diseñará una interfaz interactiva en Streamlit, donde los usuarios podrán cargar sus datos, recibir recomendaciones y generar visualizaciones de manera automatizada.
-   - La interfaz será intuitiva y accesible, pensada para usuarios con diversos niveles de experiencia técnica.
-
-3.4. Integración y Pruebas:
-   - Se integrarán todos los componentes del sistema, asegurando que la comunicación entre el LLM, los algoritmos de machine learning y la interfaz sea fluida.
-   - Se realizarán pruebas con usuarios para identificar posibles mejoras en la usabilidad y precisión del sistema.
-
- 4. Metodología
-
-La metodología del proyecto se basará en un enfoque ágil, iterativo, que permite ajustes rápidos en respuesta al feedback de los usuarios y a los resultados obtenidos durante las pruebas. Etapas de la metodologia:
-
-- Investigación Inicial: Revisión de la literatura sobre LLMs, machine learning y técnicas de visualización de datos.
-- Desarrollo Tecnológico: Programación e integración de los componentes utilizando Python, Streamlit, y APIs de OpenAI.
-- Entrenamiento de Algoritmos: Uso de datasets de prueba para entrenar y ajustar los modelos de recomendación.
-- Validación y Evaluación: Aplicación de métricas de usabilidad y precisión para evaluar la herramienta desarrollada.
-- Documentación y Presentación: Preparación de documentación técnica y académica para presentar los hallazgos y el funcionamiento del sistema en el congreso.
-
- 5. Resultados Esperados
-
-Al finalizar el proyecto, se espera haber desarrollado una herramienta que:
-
-- Proporcione visualizaciones precisas y útiles basadas en un análisis automatizado de los datos.
-- Facilite la comprensión y presentación de datos para usuarios con distintos niveles de experiencia técnica.
-- Democratice el acceso a herramientas de análisis avanzado, permitiendo a más personas tomar decisiones informadas basadas en sus datos.
-- Genere un impacto positivo en la comunidad académica y profesional al presentar un enfoque innovador para la automatización del análisis de datos.
+   1. Integrate an LLM model that can interpret data descriptions and contextualize their structure.
+   2. Develop machine learning algorithms that allow selecting the most appropriate type of visualization for the data in question.
+   3. Implement an interface in Streamlit that facilitates user interaction with the system, allowing the loading of data and the visualization of the generated recommendations.
+   4. Evaluate the effectiveness of automatically generated visualizations compared to those created manually by experts.
+   5. Validate the tool through tests with users of different levels of experience in data analysis.
 
 
- 6. Conclusión
+3. Development
 
-Este proyecto propone una solución innovadora para uno de los desafíos contemporáneos en la gestión y visualización de datos. Al combinar la capacidad de los LLMs con técnicas avanzadas de machine learning y una interfaz accesible, se puede ofrecer una herramienta poderosa para mejorar la comprensión de datos complejos. La automatización de la generación de visualizaciones no solo ahorra tiempo, sino que también aumenta la precisión y relevancia de las presentaciones visuales, beneficiando a una amplia gama de usuarios. La implementación de este sistema tiene el potencial de marcar un avance significativo en la accesibilidad y efectividad del análisis de datos.
+The development of the project will take place in several key stages:
 
- 7. Referencias
+3.1. Selection and Configuration of the LLM:
+   - A suitable OpenAI LLM will be selected, with the ability to understand and process natural language instructions related to data structure and analysis.
+   - The model will be configured so that it interacts efficiently with the data entered by users and can suggest visualizations based on recognizable patterns in the data.
+
+3.2. Design of Recommendation Algorithms:
+   - Machine learning algorithms will be developed that analyze the structure of the data (types of variables, relationships between them, etc.) to recommend the most appropriate visualization.
+   - These algorithms will be trained using standard data sets to ensure the accuracy of the recommendations.
+
+3.3. Construction of the Interface in Streamlit:
+   - An interactive interface will be designed in Streamlit, where users will be able to upload their data, receive recommendations and generate visualizations in an automated manner.
+   - The interface will be intuitive and accessible, designed for users with various levels of technical experience.
+
+3.4. Integration and Testing:
+   - All system components will be integrated, ensuring that communication between the LLM, the machine learning algorithms and the interface is fluid.
+   - Tests will be carried out with users to identify possible improvements in the usability and accuracy of the system.
+
+ 4. Methodology
+
+The project methodology will be based on an agile, iterative approach, which allows rapid adjustments in response to user feedback and results obtained during testing. Stages of the methodology:
+
+- Initial Research: Review of the literature on LLMs, machine learning and data visualization techniques.
+- Technological Development: Programming and integration of components using Python, Streamlit, and OpenAI APIs.
+- Algorithm Training: Use of test datasets to train and adjust recommendation models.
+- Validation and Evaluation: Application of usability and precision metrics to evaluate the developed tool.
+- Documentation and Presentation: Preparation of technical and academic documentation to present the findings and operation of the system at the congress.
+
+ 5. Expected Results
+
+At the end of the project, it is expected to have developed a tool that:
+
+- Provide accurate and useful visualizations based on automated data analysis.
+- Facilitate the understanding and presentation of data for users with different levels of technical experience.
+- Democratize access to advanced analytics tools, allowing more people to make informed decisions based on their data.
+- Create a positive impact on the academic and professional community by presenting an innovative approach to data analysis automation.
+
+
+ 6. Conclusion
+
+This project proposes an innovative solution for one of the contemporary challenges in data management and visualization. By combining the power of LLMs with advanced machine learning techniques and an accessible interface, it can offer a powerful tool to improve the understanding of complex data. Automating visualization generation not only saves time, but also increases the accuracy and relevance of visual presentations, benefiting a wide range of users. The implementation of this system has the potential to mark a significant advance in the accessibility and effectiveness of data analysis.
+
+ 7. References
 
  - Brown, T., Mann, B., Ryder, N., et al. (2020). Language Models are Few-Shot Learners. *Advances in Neural Information Processing Systems, 33*, 1877-1901.
 - McKinney, W. (2010). Data Structures for Statistical Computing in Python. *Proceedings of the 9th Python in Science Conference*, 51-56.
