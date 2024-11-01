@@ -41,7 +41,7 @@ def read_data(file_path_or_url):
         else:
             raise ValueError("Unsupported file format.")
 
-    return df.head()
+    return df
 
 # Función para obtener recomendaciones de visualización de OpenAI utilizando GPT-4
 def get_openai_recommendation(df, api_key, model="gpt-4-turbo"):
@@ -61,9 +61,9 @@ def get_openai_recommendation(df, api_key, model="gpt-4-turbo"):
     response = openai.ChatCompletion.create(
         model= "gpt-4-turbo",  # Cambiamos a gpt-4 o gpt-4-turbo
         messages=[
-            {"role": "system", "content": "You are an expert assistant in data analysis, specialist in visualization."},
+            {"role": "system", "content": "You are an expert assistant in data analysis specialist in visualization."},
             {"role": "user",
-             "content": f"I have a data set. {description} What type of visualizations would you recommend to and Exploratory Data Analysis from this data? Please describe from and statistical view"}
+             "content": f"I have a data set. {description} What type of visualizations would you recommend from this data? Please describe"}
         ],
         max_tokens=500  # Aumentamos los tokens si se desea más contexto
     )
@@ -88,9 +88,9 @@ def recommend_and_plot(df):
             z_axis = st.sidebar.selectbox("Select the column for the Z axis", df.columns)
 
         # Parámetros adicionales
-        st.sidebar.subheader("Parámetros configurables")
-        hist_bins = st.sidebar.slider("Número de bins para histogramas", min_value=10, max_value=100, value=30)
-        scatter_size = st.sidebar.slider("Tamaño de los puntos en el gráfico de dispersión", min_value=5, max_value=50, value=10)
+        st.sidebar.subheader("Configurables parameter")
+        hist_bins = st.sidebar.slider("Number of bins for histograms", min_value=10, max_value=100, value=20)
+        scatter_size = st.sidebar.slider("Size of points on scatter plot", min_value=5, max_value=50, value=10)
 
         # Verificar si las columnas seleccionadas existen en el DataFrame
         if x_axis not in df.columns or y_axis not in df.columns or z_axis not in df.columns:
@@ -152,9 +152,9 @@ def main():
             chart_type = st.sidebar.selectbox(
                 "Select chart type",
                 [
-                    "Scatter Chart", "Bar Chart", "Stacked Bar Chart", 
+                    "Scatter Plot", "Bar Chart", "Stacked Bar Chart", 
                     "Histogram","Line Chart", "Area Chart",  "Boxplot", "Pie chart",
-                    "3D Scatter Chart",  "Violin plot", "Heat map",
+                    "3D Scatter Plot",  "Violin plot", "Heat map",
                     "Geospatial scatter map", "Choropleth map", "Sun diagram"
                 ]
             )
@@ -162,10 +162,10 @@ def main():
             x_axis = st.sidebar.selectbox("Select the column for the X axis", df.columns)
             y_axis = st.sidebar.selectbox("Select the column for the Y axis", df.columns)
             z_axis = None
-            if chart_type in ["3D Scatter Chart", "Stacked Bar Chart"]:
+            if chart_type in ["3D Scatter Plot", "Stacked Bar Chart"]:
                 z_axis = st.sidebar.selectbox("Select column for Z axis (optional)", df.columns)
 
-            hist_bins = st.sidebar.slider("Number of bins for histograms", min_value=10, max_value=100, value=30)
+            hist_bins = st.sidebar.slider("Number of bins for histograms", min_value=10, max_value=100, value=20)
             scatter_size = st.sidebar.slider("Size of points on scatter plot", min_value=5, max_value=50, value=10)
 
             # Generar el gráfico seleccionado
@@ -187,7 +187,7 @@ def generate_plot(df, chart_type, x_axis=None, y_axis=None, z_axis=None, hist_bi
     fig = None
 
     if chart_type == "Scatter Plot":
-        fig = px.scatter(df, x=x_axis, y=y_axis, title=f'Dispersión de {x_axis} vs {y_axis}', size_max=scatter_size)
+        fig = px.scatter(df, x=x_axis, y=y_axis, title=f'Scatter plot from {x_axis} vs {y_axis}', size_max=scatter_size)
     
     elif chart_type == "Bar chart":
         fig = px.bar(df, x=x_axis, y=y_axis, title=f'Bar chart from {x_axis} vs {y_axis}')
@@ -199,10 +199,10 @@ def generate_plot(df, chart_type, x_axis=None, y_axis=None, z_axis=None, hist_bi
         fig = px.histogram(df, x=x_axis, nbins=hist_bins, title=f'Histogram from {x_axis}')
     
     elif chart_type == "Line chart":
-        fig = px.line(df, x=x_axis, y=y_axis, title=f'Líneas de {x_axis} vs {y_axis}')
+        fig = px.line(df, x=x_axis, y=y_axis, title=f'Line Chart from {x_axis} vs {y_axis}')
     
     elif chart_type == "Area Chart":
-        fig = px.area(df, x=x_axis, y=y_axis, title=f'Área de {x_axis} vs {y_axis}')
+        fig = px.area(df, x=x_axis, y=y_axis, title=f'Area Chart from {x_axis} vs {y_axis}')
     
     elif chart_type == "Pie chart":
         fig = px.pie(df, names=x_axis, title=f'Pie Chart from {x_axis}')
@@ -217,7 +217,7 @@ def generate_plot(df, chart_type, x_axis=None, y_axis=None, z_axis=None, hist_bi
         fig = px.violin(df, x=x_axis, y=y_axis, title=f'Violin from {x_axis} vs {y_axis}')
     
     elif chart_type == "Heat map":
-        fig = px.density_heatmap(df, x=x_axis, y=y_axis, title=f'heat map from {x_axis} vs {y_axis}')
+        fig = px.density_heatmap(df, x=x_axis, y=y_axis, title=f'Heat map from {x_axis} vs {y_axis}')
     
     elif chart_type == "Geospatial dispersion map":
         fig = px.scatter_geo(df, lat=y_axis, lon=x_axis, title=f'Geospatial dispersion map from {x_axis} y {y_axis}')
