@@ -5,7 +5,7 @@ import requests
 import openai
 
 # Configura tu clave API de OpenAI
-openai.api_key = 'sk-proj-nsJb8ICD7OEXNdvuUMsgT3BlbkFJjQLKNUnCid5UgFAQmwHO'
+openai.api_key = OPENAI_API_KEY
 
 st.set_page_config(
     page_title="VisBot - Visualization Recommender with AI",
