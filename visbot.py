@@ -3,9 +3,13 @@ import pandas as pd
 import plotly.express as px
 import requests
 import openai
+from openai import OpenAI
 
-# Configura tu clave API de OpenAI
-openai.api_key = 'sk-proj-nsJb8ICD7OEXNdvuUMsgT3BlbkFJjQLKNUnCid5UgFAQmwHO'
+
+# Cargar la API key desde el entorno
+client = OpenAI(
+    api_key=st.secrets["OPENAI_API_KEY"],
+)
 
 st.set_page_config(
     page_title="VisBot - Visualization Recommender with AI",
