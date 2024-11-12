@@ -45,29 +45,29 @@ def read_data(file_path_or_url):
             raise ValueError("Unsupported file format.")
     return df
 
-# Function to get visualization recommendations from OpenAI using GPT-4
-def get_openai_recommendation(df, api_key, model="gpt-4-turbo"):
+# Función para obtener recomendaciones de visualización de OpenAI utilizando GPT-4
+def get_openai_recommendation(df):
     description = f"The data set has {df.shape[0]} rows and {df.shape[1]} columns. "
     for column in df.columns:
         description += f"The '{column}' column is of type {df[column].dtype}, "
         if pd.api.types.is_numeric_dtype(df[column]):
             description += f"and contains numerical values ranging from {df[column].min()} to {df[column].max()}. "
-        elif pd.api.types.is_categorical_dtype(df[column]) or df[column].nunique() < 10:
+        
+        elif isinstance(df[column].dtype, pd.CategoricalDtype) or df[column].nunique() < 10:
             description += f"and contains {df[column].nunique()} unique categories. "
+
         elif pd.api.types.is_datetime64_any_dtype(df[column]):
             description += f"and contains time data ranging from {df[column].min()} to {df[column].max()}. "
 
-    openai.api_key = api_key  # Using GPT-4 or GPT-4-turbo
-    response = openai.ChatCompletion.create(
-        model="gpt-4-turbo",  # Switch to gpt-4 or gpt-4-turbo
+    response = client.chat.completions.create(
+        model= "gpt-4-turbo",  # Cambiamos a gpt-4 o gpt-4-turbo
         messages=[
             {"role": "system", "content": "You are an expert assistant in data analysis specialized in visualization."},
             {"role": "user", "content": f"I have a data set. {description} What type of visualizations would you recommend from this data? Describe and if possible recommend options"}
         ],
         max_tokens=500  # Increase tokens if more context is desired
     )
-    return response['choices'][0]['message']['content']
-
+    return response.choices[0].message.content
 
 # Function to generate visualizations
 def recommend_and_plot(df):
@@ -85,8 +85,8 @@ def recommend_and_plot(df):
 
         # Additional parameters
         st.sidebar.subheader("Configurable Parameters")
-        hist_bins = st.sidebar.slider("Number of bins for histograms", min_value=10, max_value=100, value=20)
-        scatter_size = st.sidebar.slider("Size of points on scatter plot", min_value=5, max_value=50, value=10)
+        hist_bins = st.sidebar.slider("Number of bins for histograms", min_value=10, max_value=100, value=20, key="hist_bins_slider")
+        scatter_size = st.sidebar.slider("Size of points on scatter plot", min_value=5, max_value=50, value=10, key="scatter_size_slider")
 
         # Check if selected columns exist in the DataFrame
         if x_axis not in df.columns or y_axis not in df.columns or (z_axis and z_axis not in df.columns):
@@ -104,7 +104,6 @@ def recommend_and_plot(df):
     except Exception as e:
         # Any other unforeseen error
         st.error(f"An unexpected error occurred: {str(e)}")
-
 
 # Function to generate charts depending on selected data types and chart type
 def generate_plot(df, chart_type, x_axis=None, y_axis=None, z_axis=None, hist_bins=30, scatter_size=10):
@@ -157,45 +156,42 @@ def main():
     uploaded_file = st.file_uploader("Load your CSV, XLSX or JSON file", type=["csv", "xlsx", "json"])
     
     df = None
+
+    # Leer el archivo o URL
     
-    # Read the file or URL
-    if api_key:
-        if url_input:
-            try:
-                df = read_data(url_input)
-            except ValueError as e:
-                st.error(f"Error when processing data from URL: {e}")
-        
-        elif uploaded_file is not None:
-            try:
-                df = read_data(uploaded_file)
-            except ValueError as e:
-                st.error(f"Error processing file: {e}")
+    if url_input:
+        try:
+            df = read_data(url_input)
+        except ValueError as e:
+            st.error(f"Error when processing data from URL: {e}")
+    elif uploaded_file is not None:
+        try:
+            df = read_data(uploaded_file)
+        except ValueError as e:
+            st.error(f"Error processing file: {e}")
 
     if df is not None:
-        st.write(df.head())  # Show the first rows of the DataFrame
-        
-        # Generate and show OpenAI visualization recommendations
-        st.subheader("AI Recommended Visualizations")
-        
+        st.write(df.head())  # Mostrar las primeras filas del DataFrame
+
+        # Generar y mostrar las recomendaciones de visualización de OpenAI
+        st.subheader("iA Recommended Visualizations")
         try:
-            recommendation = get_openai_recommendation(df, api_key)
-            st.markdown(recommendation)  # Show GPT-4 recommendations
-            
+            recommendation = get_openai_recommendation(df)
+            st.markdown(recommendation)  # Muestra las recomendaciones de GPT-4
         except Exception as e:
             st.error(f"Error getting OpenAI recommendations: {str(e)}")
 
-        # Selection of chart type (chart_type) and variables for axes
+        # Selección de tipo de gráfico (chart_type) y variables para los ejes
         chart_type = st.sidebar.selectbox(
             "Select chart type",
             [
-                "Scatter Plot", "Bar Chart", "Stacked Bar Chart", "Grouped Bar Chart", "Histogram",
-                "Line Graph", "Area Chart", "Boxplot", "Pie chart",
-                "3D Scatter Plot", "Violin plot", "Heat map"
+                "Scatter Plot", "Bar Chart", "Stacked Bar Chart", 
+                "Histogram","Line Chart", "Area Chart",  "Boxplot", "Pie chart",
+                "3D Scatter Plot",  "Violin plot", "Heat map",
                 "Geospatial scatter map", "Choropleth map", "Sun diagram"
             ]
         )
-        
+
         x_axis = st.sidebar.selectbox("Select the column for the X axis", df.columns)
         y_axis = st.sidebar.selectbox("Select the column for the Y axis", df.columns)
 
@@ -203,9 +199,8 @@ def main():
         if chart_type in ["3D Scatter Plot", "Stacked Bar Chart", "Grouped Bar Chart"]:
             z_axis = st.sidebar.selectbox("Select column for Z axis (optional)", df.columns)
 
-        hist_bins = st.sidebar.slider("Number of bins for histograms", min_value=10, max_value=100, value=20)
-        
-        scatter_size = st.sidebar.slider("Size of points on scatter plot", min_value=5, max_value=50, value=10)
+        hist_bins = st.sidebar.slider("Number of bins for histograms", min_value=10, max_value=100, value=20, key="hist_bins_slider")
+        scatter_size = st.sidebar.slider("Size of points on scatter plot", min_value=5, max_value=50, value=10, key="scatter_size_slider")
 
         # Generate the selected chart
         fig = generate_plot(df, chart_type, x_axis, y_axis, z_axis, hist_bins, scatter_size)
