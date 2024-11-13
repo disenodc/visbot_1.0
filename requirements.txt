@@ -5,6 +5,6 @@ seaborn
 plotly
 scikit-learn
 requests
-openai==0.28
+openai
 panel==0.13.1
 
