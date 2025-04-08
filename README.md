@@ -1,6 +1,7 @@
 ![Logo visbot](https://raw.githubusercontent.com/disenodc/VisBot/refs/heads/main/bot_1.png)
 # VisBot - Automated Interactive Visualization Recommender Using Large Language Models
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.15176569.svg)](https://doi.org/10.5281/zenodo.15176569)
 
 - Visitar: [Sitio Web](https://visbot.streamlit.app/) / [LICENCIA](https://github.com/disenodc/VisBot/blob/main/LICENSE)
 - Authors: BCCs. Luis Dario Ceballos. Dr. Marcos Zarate, BCCs Gustavo Nuñez and Dr. Claudio Delrieux
