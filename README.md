@@ -1,5 +1,5 @@
 ![Logo visbot](https://raw.githubusercontent.com/disenodc/VisBot/refs/heads/main/bot_1.png)
-# VisBot - Visualization Recommender with iA - Automated Interactive Visualization Recommendations Using Large Language Models: Enhancing Data Insights and Accessibility
+# VisBot - Automated Interactive Visualization Recommendations Using Large Language Models: Enhancing Data Insights and Accessibility
 
 
 - Visitar: [Sitio Web](https://visbot.streamlit.app/) / [LICENCIA](https://github.com/disenodc/VisBot/blob/main/LICENSE)
