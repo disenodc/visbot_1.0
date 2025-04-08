@@ -1,0 +1,11 @@
+cff-version: 1.2.0
+message: "Please cite this work using the metadata in this file.."
+title: "Automated Interactive Visualization Recommendations Using Large Language Models"
+version: "1.0.0"
+Prior author:
+  - given-names: "Luis Dario"
+    family-names: "Ceballos"
+    orcid: "https://orcid.org/0009-0002-9207-7023"  # Opcional
+doi: "10.5281/zenodo.1234567"  # Si ya tienes DOI en Zenodo
+license: "MIT"  # La licencia de tu proyecto
+repository-code: "https://github.com/disenodc/visbot_1.0"
