@@ -1,10 +1,9 @@
 ![Logo visbot](https://raw.githubusercontent.com/disenodc/VisBot/refs/heads/main/bot_1.png)
-# VisBot - Visualization Recommender with iA
+# VisBot - Visualization Recommender with iA - Automated Interactive Visualization Recommendations Using Large Language Models: Enhancing Data Insights and Accessibility
+
 
 - Visitar: [Sitio Web](https://visbot.streamlit.app/) / [LICENCIA](https://github.com/disenodc/VisBot/blob/main/LICENSE)
 - Authors: BCCs. Luis Dario Ceballos. Dr. Marcos Zarate, BCCs Gustavo Nuñez and Dr. Claudio Delrieux
-- PhD in Computer Science. UAI (Inter-American Open University), Buenos Aires-Argentina.
-   CESIMAR - CENPAT - CONICET. Puerto Madryn, Chubut, Argentina, (U9120).
 
 
 ## PIPELINE locally executed
