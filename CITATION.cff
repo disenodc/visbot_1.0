@@ -1,6 +1,6 @@
 cff-version: 1.2.0
 message: "Please cite this work using the metadata in this file."
-title: "Automated Interactive Visualization Recommendations Using Large Language Models"
+title: "VisBot: Automated Interactive Visualization Recommender Using Large Language Models"
 version: "1.0.0"
 authors:
   - given-names: "Luis Dario"
