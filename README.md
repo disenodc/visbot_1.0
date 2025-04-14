@@ -3,7 +3,7 @@
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.15176569.svg)](https://doi.org/10.5281/zenodo.15176569)
 [![Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://visbot.streamlit.app)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/disenodc/VisBot/blob/main/LICENSE.md)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/disenodc/visbot_1.0/blob/main/LICENSE)
 
 - Authors: BCCs. Luis Dario Ceballos. Dr. Marcos Zarate, BCCs Gustavo Nuñez and Dr. Claudio Delrieux
 
